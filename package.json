@@ -1,0 +1,19 @@
+{
+  "name": "gitignores",
+  "main": "./lib/gitignores",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": "gitignores:create"
+  },
+  "repository": "https://github.com/atom/gitignores",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+    "atom-select-list": ">=0.2.0"
+  }
+}

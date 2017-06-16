@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Create .gitignore",
+        "command": "gitignores:create"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Gitignores",
+          "submenu": [
+            {
+              "label": "Create",
+              "command": "gitignores:create"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
