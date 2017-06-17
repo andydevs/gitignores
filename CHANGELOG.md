@@ -1,3 +1,4 @@
 ## 0.1.0 - First Release
-* Every feature added
-* Every bug fixed
+* UI Created
+* Gitignore creation system implemented
+* Unit test skeleton implemented
