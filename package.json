@@ -1,14 +1,19 @@
 {
   "name": "gitignores",
+  "author": "andydevs",
   "main": "./lib/gitignores",
-  "version": "0.0.0",
-  "description": "A short description of your package",
+  "version": "0.1.0",
+  "description": "Creates .gitignore files using GitHub's .gitignore api",
   "keywords": [
+      "git",
+      "github",
+      "gitignore",
+      ".gitignore"
   ],
   "activationCommands": {
     "atom-workspace": "gitignores:create"
   },
-  "repository": "https://github.com/atom/gitignores",
+  "repository": "https://github.com/andydevs/gitignores",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
