@@ -10,9 +10,6 @@
     "gitignore",
     ".gitignore"
   ],
-  "activationCommands": {
-    "atom-workspace": "gitignores:create"
-  },
   "repository": "https://github.com/andydevs/gitignores",
   "license": "MIT",
   "engines": {
