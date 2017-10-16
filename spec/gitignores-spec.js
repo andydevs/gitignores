@@ -16,28 +16,28 @@ import SelectListView from 'atom-select-list'
 describe('Gitignores', () => {
     // Variables
     var activatedPromise
-    var workspaceElement
+    var workspaceView
 
     // Do before each
     beforeEach(() => {
         activatedPromise = atom.packages.activatePackage('gitignores')
-        workspaceElement = atom.views.getView(atom.workspace)
-        jasmine.attachToDOM(workspaceElement)
+        workspaceView = atom.views.getView(atom.workspace)
+        jasmine.attachToDOM(workspaceView)
     })
 
     // Describe create command
     describe('gitignores:create', () => {
         it('Shows the selector panel', () => {
-            // Dispatch command
-            atom.commands.dispatch(workspaceElement, 'gitignores:create')
+            // Dispatch create command
+            atom.commands.dispatch(workspaceView, 'gitignores:create')
             waitsForPromise(() => activatedPromise)
 
             // Run tests
             var panels = atom.workspace.getModalPanels()
             expect(panels.length).toBeGreaterThan(0)
-            var panel = panels[0]
-            expect(panel.getItem().classList.contains('select-list')).toBeTruthy()
-            expect(panel.getItem().classList.contains('gitignores')).toBeTruthy()
+            var selectorView = panels[0].getItem()
+            expect(selectorView.classList.contains('select-list')).toBeTruthy()
+            expect(selectorView.classList.contains('gitignores')).toBeTruthy()
         })
     })
 
@@ -45,7 +45,24 @@ describe('Gitignores', () => {
     describe('When selector view is open', () => {
         // Describe cancel command
         describe('core:cancel', () => {
-            it('Closes the selector panel', () => {})
+            it('Closes the selector panel', (done) => {
+                // Dispatch create command
+                atom.commands.dispatch(workspaceView, 'gitignores:create')
+                waitsForPromise(() => activatedPromise)
+
+                // Get slector view
+                var panels = atom.workspace.getModalPanels()
+                var selectorView = panels[0].getItem()
+
+                // Dispatch cancel command
+                atom.commands.dispatch(selectorView, 'core:cancel')
+                atom.commands.onDidDispatch(() => {
+                    // Check if selector view is gone
+                    var panels = atom.workspace.getModalPanels()
+                    expect(panels.length).toEqual(0)
+                    done()
+                })
+            })
         })
 
         // Describe confirm command
