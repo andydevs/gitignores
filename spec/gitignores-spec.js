@@ -9,6 +9,8 @@
  */
 
 // Imports
+import fs from 'fs'
+import path from 'path'
 import Gitignores from '../lib/gitignores'
 import SelectListView from 'atom-select-list'
 
@@ -67,8 +69,43 @@ describe('Gitignores', () => {
 
         // Describe confirm command
         describe('core:confirm', () => {
-            it('Closes the selector panel', () => {})
-            it('Creates a new .gitignore', () => {})
+            it('Closes the selector panel', (done) => {
+                // Dispatch create command
+                atom.commands.dispatch(workspaceView, 'gitignores:create')
+                waitsForPromise(() => activatedPromise)
+
+                // Get slector view
+                var panels = atom.workspace.getModalPanels()
+                var selectorView = panels[0].getItem()
+
+                // Dispatch cancel command
+                atom.commands.dispatch(selectorView, 'core:confirm')
+                atom.commands.onDidDispatch(() => {
+                    // Check if selector view is gone
+                    var panels = atom.workspace.getModalPanels()
+                    expect(panels.length).toEqual(0)
+                    done()
+                })
+            })
+            it('Creates a new .gitignore', () => {
+                // Dispatch create command
+                atom.commands.dispatch(workspaceView, 'gitignores:create')
+                waitsForPromise(() => activatedPromise)
+
+                // Get slector view
+                var panels = atom.workspace.getModalPanels()
+                var selectorView = panels[0].getItem()
+
+                // Dispatch cancel command
+                atom.commands.dispatch(selectorView, 'core:confirm')
+                atom.commands.onDidDispatch(() => {
+                    // Check if selector view is gone
+                    projPath = atom.project.path
+                    fileexist = fs.existsSync(path.join(projPath, '.gitignore'))
+                    expect(fileexist).toBeTruthy()
+                    done()
+                })
+            })
         })
     })
 })
