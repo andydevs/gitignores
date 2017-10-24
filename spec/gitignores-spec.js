@@ -87,7 +87,7 @@ describe('Gitignores', () => {
                     done()
                 })
             })
-            it('Creates a new .gitignore', () => {
+            it('Creates a new .gitignore', (done) => {
                 // Dispatch create command
                 atom.commands.dispatch(workspaceView, 'gitignores:create')
                 waitsForPromise(() => activatedPromise)
